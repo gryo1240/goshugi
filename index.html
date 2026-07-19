@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#8A6D2F">
+<title>ご祝儀・香典 早見表 — 相手との関係と年代で相場がわかる</title>
+<meta name="description" content="結婚式のご祝儀・お葬式の香典はいくら包む?相手との関係と自分の年代を選ぶだけで金額相場と袋・表書き・お札のマナーがわかる無料アプリ。登録不要・完全オフライン対応。">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ご祝儀香典">
+</head>
+<body>
+<style>
+:root{
+  --bg:#F8F5EF; --surface:#FFFFFF; --ink:#322B1F; --muted:#7E7460;
+  --line:#E8E1D2; --accent:#8A6D2F; --accent-ink:#FFFFFF; --accent-soft:#F2EAD8;
+  --warn:#B0563B; --warn-soft:#F6E9E3; --chip:#EFE9DB; --ok:#3E7A52; --okbg:#E5F0E9;
+  --shadow:0 1px 3px rgba(60,50,25,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1B1812; --surface:#26221A; --ink:#ECE6D9; --muted:#A99F8B;
+    --line:#3D3728; --accent:#CBAD6A; --accent-ink:#2A2008; --accent-soft:#3A331F;
+    --warn:#D69073; --warn-soft:#3A2A21; --chip:#332D20; --ok:#7FBE97; --okbg:#233A2C;
+    --shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#F8F5EF; --surface:#FFFFFF; --ink:#322B1F; --muted:#7E7460;
+  --line:#E8E1D2; --accent:#8A6D2F; --accent-ink:#FFFFFF; --accent-soft:#F2EAD8;
+  --warn:#B0563B; --warn-soft:#F6E9E3; --chip:#EFE9DB; --ok:#3E7A52; --okbg:#E5F0E9;
+  --shadow:0 1px 3px rgba(60,50,25,.08);
+}
+:root[data-theme="dark"]{
+  --bg:#1B1812; --surface:#26221A; --ink:#ECE6D9; --muted:#A99F8B;
+  --line:#3D3728; --accent:#CBAD6A; --accent-ink:#2A2008; --accent-soft:#3A331F;
+  --warn:#D69073; --warn-soft:#3A2A21; --chip:#332D20; --ok:#7FBE97; --okbg:#233A2C;
+  --shadow:0 1px 3px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{background:var(--bg); color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Noto Sans JP",Meiryo,sans-serif;
+  font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+#app{max-width:720px; margin:0 auto; padding:0 14px 84px;}
+header.top{position:sticky; top:0; z-index:20; background:var(--bg);
+  padding:14px 2px 10px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--line);}
+header.top h1{font-size:18px; font-weight:700; letter-spacing:.02em;}
+header.top .sub{color:var(--muted); font-size:13px; margin-left:auto;}
+main{padding-top:14px;}
+h2{font-size:15px; font-weight:700; letter-spacing:.04em; margin:18px 0 8px;}
+.small{font-size:12.5px; color:var(--muted);}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:12px 14px; margin-bottom:10px;}
+button{font:inherit; cursor:pointer; border:none; border-radius:8px; padding:8px 14px; background:var(--chip); color:var(--ink);}
+button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+nav.tabs{position:fixed; bottom:0; left:0; right:0; z-index:30; background:var(--surface); border-top:1px solid var(--line); display:flex; justify-content:center;}
+nav.tabs .inner{display:flex; width:100%; max-width:720px;}
+nav.tabs button{flex:1; background:none; border-radius:0; padding:10px 0 12px; font-size:11.5px; color:var(--muted); display:flex; flex-direction:column; gap:2px; align-items:center;}
+nav.tabs button .ic{font-size:18px; line-height:1;}
+nav.tabs button.on{color:var(--accent); font-weight:700;}
+.f-row{margin:12px 0;}
+.f-row:first-child{margin-top:0;}
+.f-row .lbl{font-size:12.5px; color:var(--muted); font-weight:700; letter-spacing:.05em; margin-bottom:5px;}
+.seg{display:flex; flex-wrap:wrap; gap:6px;}
+.seg button{padding:6px 12px; font-size:13px; border:1px solid var(--line); background:var(--surface); border-radius:8px;}
+.seg button.on{background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:700;}
+/* result */
+.result{text-align:center; padding:16px 14px;}
+.result .lb{font-size:12.5px; color:var(--muted);}
+.result .amt{font-size:30px; font-weight:800; color:var(--accent); letter-spacing:.02em; line-height:1.4;}
+.result .note{font-size:13px; margin-top:4px;}
+.chips{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:10px;}
+.chip{display:inline-block; font-size:12.5px; padding:4px 11px; border-radius:999px; background:var(--accent-soft); color:var(--ink); font-weight:600;}
+.mannerbox{margin-top:10px; text-align:left;}
+.mannerbox .mrow{display:flex; gap:8px; padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+.mannerbox .mrow:last-child{border-bottom:none;}
+.mannerbox .mk{flex:0 0 6.5em; color:var(--muted); font-weight:700; font-size:12.5px;}
+.warnbox{background:var(--warn-soft); border-radius:8px; padding:9px 12px; font-size:13px; margin-top:10px; text-align:left;}
+.warnbox b{color:var(--warn);}
+details{margin-top:8px;}
+details summary{cursor:pointer; font-size:13.5px; padding:4px 0; font-weight:600;}
+.article h4{font-size:14px; margin:12px 0 4px;}
+.article p,.article li{font-size:13.5px;}
+.article ul,.article ol{padding-left:1.4em;}
+.article table{border-collapse:collapse; margin:6px 0; font-size:13px; width:100%;}
+.article th,.article td{border:1px solid var(--line); padding:4px 8px; text-align:left;}
+</style>
+
+<div id="app">
+  <header class="top"><h1>ご祝儀・香典 早見表</h1><span class="sub">相場とマナー</span></header>
+  <main>
+    <section id="tab-iwai"></section>
+    <section id="tab-kouden" hidden></section>
+    <section id="tab-know" hidden></section>
+    <section id="tab-settings" hidden></section>
+  </main>
+</div>
+<nav class="tabs"><div class="inner">
+  <button data-tab="iwai" class="on"><span class="ic">🎊</span>お祝い</button>
+  <button data-tab="kouden"><span class="ic">🥀</span>香典</button>
+  <button data-tab="know"><span class="ic">💡</span>マナー知識</button>
+  <button data-tab="settings"><span class="ic">⚙️</span>設定</button>
+</div></nav>
+
+<script>
+"use strict";
+/* ============ 相場データ ============
+   金額は冠婚葬祭の一般的なマナーとして広く共有されている目安(万円文化は数十年安定)。
+   年代は [20代, 30代, 40代以上] の3区分。リライト不要の設計として、
+   変わりうる情報(特定商品・サービス・税制)は一切持たない */
+const AGES=["20代","30代","40代以上"];
+
+const IWAI_EVENTS=[
+ {id:"wed",label:"結婚式(出席)",rel:[
+   ["友人・同僚",["2〜3万円","3万円","3万円"]],
+   ["兄弟姉妹",["3〜5万円","5万円","5〜10万円"]],
+   ["いとこ・親戚",["2〜3万円","3〜5万円","3〜5万円"]],
+   ["甥・姪",["3万円","3〜5万円","5〜10万円"]],
+   ["職場の部下・後輩",["2〜3万円","3万円","3〜5万円"]],
+   ["職場の上司・先輩",["3万円","3万円","3〜5万円"]],
+   ["取引先",["3万円","3万円","3〜5万円"]]
+  ],
+  note:"夫婦で出席する場合は2人分として5万円+品物、または7万円が一般的",
+  manner:{fukuro:"紅白の水引・結び切り(10本)",omote:"寿 / 御結婚御祝",satsu:"新札を用意する",fukusa:"暖色系(赤・えんじ・金など)の袱紗",chu:"中袋の表に金額(例: 金参萬円)、裏に住所と名前"},
+  warn:"割り切れる偶数と「4」「9」は避けるのが基本(2万円は「ペア」として許容されつつある。その場合は1万円+5千円×2枚で枚数を奇数に)"},
+ {id:"wedno",label:"結婚式(欠席・お祝いのみ)",rel:[
+   ["友人・同僚",["5千〜1万円","1万円","1万円"]],
+   ["兄弟姉妹",["1〜3万円","3万円","3〜5万円"]],
+   ["いとこ・親戚",["1万円","1〜3万円","1〜3万円"]],
+   ["職場の人",["5千〜1万円","1万円","1万円"]]
+  ],
+  note:"出席予定だった式を直前で欠席する場合は、予定していた金額をそのまま贈るのが誠意",
+  manner:{fukuro:"紅白の水引・結び切り(10本)",omote:"寿 / 御結婚御祝",satsu:"新札を用意する",fukusa:"暖色系の袱紗",chu:"現金書留で送る場合もご祝儀袋に入れてから封筒へ"},
+  warn:"式より前(招待状の返信後〜1週間前まで)に渡すか送るのがスマート"},
+ {id:"baby",label:"出産祝い",rel:[
+   ["友人・同僚",["5千〜1万円","5千〜1万円","1万円"]],
+   ["兄弟姉妹",["1万円","1〜3万円","1〜3万円"]],
+   ["いとこ・親戚",["5千〜1万円","1万円","1万円"]],
+   ["職場の人",["3千〜5千円","5千円","5千円"]]
+  ],
+  note:"職場は連名でまとめるのも一般的。現金の代わりに品物でもOK",
+  manner:{fukuro:"紅白の水引・蝶結び(何度あってもよいお祝い)",omote:"御出産御祝 / 御祝",satsu:"新札が望ましい",fukusa:"暖色系の袱紗",chu:"生後1週間〜1ヶ月(お宮参り)頃までに贈るのが目安"},
+  warn:"産前に贈るのは避け、母子の無事がわかってから贈るのがマナー"},
+ {id:"nyugaku",label:"入園・入学祝い",rel:[
+   ["甥・姪",["5千〜1万円","1万円","1万円"]],
+   ["孫",["1〜3万円","1〜3万円","1〜3万円"]],
+   ["親戚の子",["5千円","5千〜1万円","5千〜1万円"]],
+   ["友人の子",["3千〜5千円","5千円","5千円"]]
+  ],
+  note:"身内のお祝いなので、友人の子には無理に贈らなくても失礼にはあたらない",
+  manner:{fukuro:"紅白の水引・蝶結び",omote:"御入学御祝 / 御祝",satsu:"新札が望ましい",fukusa:"暖色系の袱紗",chu:"入学の2〜3週間前までに。図書カードなど品物でも喜ばれる"},
+  warn:"進学が確定してから贈る。浪人・併願の可能性がある時期は避ける"},
+ {id:"house",label:"新築・引っ越し祝い",rel:[
+   ["友人・同僚",["5千〜1万円","1万円","1万円"]],
+   ["兄弟姉妹",["1〜3万円","1〜3万円","3万円"]],
+   ["いとこ・親戚",["1万円","1万円","1〜3万円"]],
+   ["職場の人",["5千円","5千円","5千〜1万円"]]
+  ],
+  note:"新居に招かれた場合は手土産+お祝いで合計がこの目安になればOK",
+  manner:{fukuro:"紅白の水引・蝶結び",omote:"御新築御祝 / 御引越御祝",satsu:"新札が望ましい",fukusa:"暖色系の袱紗",chu:"引っ越し後1〜2ヶ月以内が目安"},
+  warn:"火を連想させる贈り物(ライター・キャンドル・赤いもの)は避けるのが慣習"}
+];
+
+const KOUDEN_REL=[
+ ["親",["3〜10万円","5〜10万円","5〜10万円"]],
+ ["兄弟姉妹",["3〜5万円","5万円","5万円"]],
+ ["祖父母",["1万円","1〜3万円","3〜5万円"]],
+ ["おじ・おば",["1万円","1〜2万円","1〜3万円"]],
+ ["その他の親戚",["5千〜1万円","1万円","1〜3万円"]],
+ ["友人・知人",["5千円","5千〜1万円","5千〜1万円"]],
+ ["友人・知人の親",["3千〜5千円","3千〜1万円","5千〜1万円"]],
+ ["職場の同僚・上司",["5千円","5千〜1万円","1万円"]],
+ ["職場の人の家族",["3千〜5千円","3千〜5千円","5千円"]],
+ ["近所の人",["3千〜5千円","3千〜5千円","5千円"]]
+];
+const RELIGIONS=[
+ {id:"butsu",label:"仏式",omote:"御霊前(四十九日の後は御仏前)",note:"最も一般的。蓮の花の絵柄の袋は仏式専用"},
+ {id:"jodo",label:"浄土真宗",omote:"御仏前",note:"浄土真宗では通夜・葬儀でも「御仏前」を使う(御霊前は使わない)"},
+ {id:"shinto",label:"神式",omote:"御玉串料 / 御榊料",note:"蓮の絵柄のない無地の袋を使う"},
+ {id:"kirisuto",label:"キリスト教",omote:"御花料",note:"水引なしの白封筒か十字架・百合の袋。カトリックなら「御ミサ料」も"},
+ {id:"unknown",label:"わからない",omote:"御霊前(広く使われる)",note:"宗派不明なら「御霊前」が無難とされるが、浄土真宗とわかっている場合は「御仏前」に"}
+];
+
+/* ============ マナー知識記事 ============ */
+const ARTICLES=[
+ {t:"金額の基本ルール — 割り切れない数と「4・9」",b:`<ul>
+ <li>お祝いは<b>奇数(1・3・5万円)</b>が基本。「割り切れる=別れる」を連想させる偶数は避ける</li>
+ <li><b>4(死)と9(苦)</b>は慶弔どちらでも避ける</li>
+ <li>2万円は「ペア」の意味で最近は許容されつつある。その場合は<b>1万円札1枚+5千円札2枚</b>にして枚数を奇数にする工夫を</li>
+ <li>香典も同様に1・3・5・10のキリのよい数字で包む</li></ul>`},
+ {t:"お札の向きと新札・旧札",b:`<h4>お祝い(ご祝儀)</h4>
+ <ul><li><b>新札</b>を用意する(「この日を楽しみに準備していました」の意味)</li>
+ <li>お札は<b>肖像画が表・上</b>になる向きで揃えて入れる</li></ul>
+ <h4>お悔やみ(香典)</h4>
+ <ul><li><b>旧札</b>を使う(「不幸を予期して準備していた」と取られないため)。新札しかなければ一度折り目をつける</li>
+ <li>お札は<b>肖像画が裏・下</b>になる向きで入れる(悲しみでうつむく、の意)</li></ul>`},
+ {t:"袱紗(ふくさ)の色と包み方",b:`<ul>
+ <li><b>お祝い</b> → 赤・えんじ・金などの<b>暖色系</b>。右開きになるように包む</li>
+ <li><b>お悔やみ</b> → 紺・緑・グレーなどの<b>寒色系</b>。左開きになるように包む</li>
+ <li><b>紫はどちらにも使える</b>万能色。1枚持つなら紫がおすすめ</li>
+ <li>受付では袱紗から出し、<b>相手から文字が読める向き</b>に回して両手で渡す</li></ul>`},
+ {t:"中袋の書き方 — 金額は旧字体(大字)で",b:`<p>中袋の表の中央に金額、裏の左下に住所・氏名を書きます。金額は改ざん防止の意味で旧字体(大字)を使うのが正式です。</p>
+ <table><tr><th>金額</th><th>書き方</th></tr>
+ <tr><td>5千円</td><td>金伍仟円 / 金伍阡円</td></tr>
+ <tr><td>1万円</td><td>金壱萬円</td></tr>
+ <tr><td>3万円</td><td>金参萬円</td></tr>
+ <tr><td>5万円</td><td>金伍萬円</td></tr>
+ <tr><td>10万円</td><td>金拾萬円 / 金什萬円</td></tr></table>
+ <p>最後に「也」をつける(金参萬円也)のはより丁寧な形。つけなくても失礼にはなりません。</p>`},
+ {t:"香典の表書きは「薄墨」で",b:`<ul>
+ <li>香典の表書きは<b>薄墨の筆ペン</b>で書くのが正式(「涙で墨が薄まった」の意)。四十九日以降の法要は濃い墨に戻す</li>
+ <li>お祝いは<b>濃い墨</b>ではっきりと書く</li>
+ <li>名前はフルネームで水引の下・中央に。夫婦連名は夫を右、妻を左に</li>
+ <li>会社の連名は<b>3名まで</b>が目安。右から目上の順に書き、4名以上は「◯◯一同」+全員の名前を書いた紙を中に入れる</li></ul>`},
+ {t:"渡し方と当日のふるまい",b:`<h4>結婚式</h4>
+ <ul><li>受付で「本日はおめでとうございます」と一言添えて両手で渡す</li>
+ <li>袱紗から出して、相手が読める向きに回してから</li></ul>
+ <h4>お通夜・葬儀</h4>
+ <ul><li>受付で「このたびはご愁傷さまです」と小声で。長々と話さないのが配慮</li>
+ <li>通夜と葬儀の両方に参列する場合、香典は<b>どちらか一度だけ</b>(二度は「不幸が重なる」を連想させる)</li>
+ <li>どうしても参列できない時は、弔電や現金書留(香典袋に入れて)で気持ちを届ける</li></ul>`}
+];
+
+/* ============ 状態(選択はページ内のみ・保存しない完全ステートレス設計) ============ */
+const $=s=>document.querySelector(s);
+function esc(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+let iwaiSel={ev:"wed", rel:0, age:1};
+let koudenSel={rel:5, age:1, rel2:"unknown"};
+
+/* ============ お祝いタブ ============ */
+function renderIwai(){
+  const el=$("#tab-iwai");
+  const ev=IWAI_EVENTS.find(e=>e.id===iwaiSel.ev);
+  if(iwaiSel.rel>=ev.rel.length) iwaiSel.rel=0;
+  const [relLabel, amounts]=ev.rel[iwaiSel.rel];
+  const amount=amounts[iwaiSel.age];
+  let html=`<div class="card">
+    <div class="f-row"><div class="lbl">なんのお祝い?</div>
+      <div class="seg" id="evSeg">${IWAI_EVENTS.map(e=>`<button data-v="${e.id}" class="${iwaiSel.ev===e.id?"on":""}">${esc(e.label)}</button>`).join("")}</div></div>
+    <div class="f-row"><div class="lbl">相手との関係は?</div>
+      <div class="seg" id="relSeg">${ev.rel.map((r,i)=>`<button data-v="${i}" class="${iwaiSel.rel===i?"on":""}">${esc(r[0])}</button>`).join("")}</div></div>
+    <div class="f-row" style="margin-bottom:0"><div class="lbl">あなたの年代は?</div>
+      <div class="seg" id="ageSeg">${AGES.map((a,i)=>`<button data-v="${i}" class="${iwaiSel.age===i?"on":""}">${esc(a)}</button>`).join("")}</div></div>
+  </div>`;
+  html+=`<div class="card result">
+    <div class="lb">${esc(ev.label)} × ${esc(relLabel)} × ${esc(AGES[iwaiSel.age])} の相場</div>
+    <div class="amt">${esc(amount)}</div>
+    ${ev.note?`<div class="note small">${esc(ev.note)}</div>`:""}
+    <div class="mannerbox">
+      <div class="mrow"><span class="mk">袋・水引</span><span>${esc(ev.manner.fukuro)}</span></div>
+      <div class="mrow"><span class="mk">表書き</span><span>${esc(ev.manner.omote)}</span></div>
+      <div class="mrow"><span class="mk">お札</span><span>${esc(ev.manner.satsu)}</span></div>
+      <div class="mrow"><span class="mk">袱紗(ふくさ)</span><span>${esc(ev.manner.fukusa)}</span></div>
+      <div class="mrow"><span class="mk">メモ</span><span>${esc(ev.manner.chu)}</span></div>
+    </div>
+    ${ev.warn?`<div class="warnbox"><b>⚠ 注意:</b> ${esc(ev.warn)}</div>`:""}
+  </div>
+  <p class="small">相場は一般的な目安です。地域やご家庭の慣習、おつき合いの深さを優先してください。</p>`;
+  el.innerHTML=html;
+  el.querySelectorAll("#evSeg button").forEach(b=>b.onclick=()=>{ iwaiSel.ev=b.dataset.v; iwaiSel.rel=0; renderIwai(); });
+  el.querySelectorAll("#relSeg button").forEach(b=>b.onclick=()=>{ iwaiSel.rel=+b.dataset.v; renderIwai(); });
+  el.querySelectorAll("#ageSeg button").forEach(b=>b.onclick=()=>{ iwaiSel.age=+b.dataset.v; renderIwai(); });
+}
+
+/* ============ 香典タブ ============ */
+function renderKouden(){
+  const el=$("#tab-kouden");
+  const [relLabel, amounts]=KOUDEN_REL[koudenSel.rel];
+  const amount=amounts[koudenSel.age];
+  const rel=RELIGIONS.find(r=>r.id===koudenSel.rel2);
+  let html=`<div class="card">
+    <div class="f-row"><div class="lbl">亡くなった方との関係は?</div>
+      <div class="seg" id="krelSeg">${KOUDEN_REL.map((r,i)=>`<button data-v="${i}" class="${koudenSel.rel===i?"on":""}">${esc(r[0])}</button>`).join("")}</div></div>
+    <div class="f-row"><div class="lbl">あなたの年代は?</div>
+      <div class="seg" id="kageSeg">${AGES.map((a,i)=>`<button data-v="${i}" class="${koudenSel.age===i?"on":""}">${esc(a)}</button>`).join("")}</div></div>
+    <div class="f-row" style="margin-bottom:0"><div class="lbl">ご宗教は?(表書きが変わります)</div>
+      <div class="seg" id="krel2Seg">${RELIGIONS.map(r=>`<button data-v="${r.id}" class="${koudenSel.rel2===r.id?"on":""}">${esc(r.label)}</button>`).join("")}</div></div>
+  </div>`;
+  html+=`<div class="card result">
+    <div class="lb">${esc(relLabel)} × ${esc(AGES[koudenSel.age])} の香典の相場</div>
+    <div class="amt">${esc(amount)}</div>
+    <div class="mannerbox">
+      <div class="mrow"><span class="mk">表書き</span><span><b>${esc(rel.omote)}</b><br><span class="small">${esc(rel.note)}</span></span></div>
+      <div class="mrow"><span class="mk">袋・水引</span><span>黒白(または双銀)の結び切り。関西など一部地域では黄白</span></div>
+      <div class="mrow"><span class="mk">お札</span><span>旧札を使う(新札しかなければ折り目をつける)。肖像画を裏・下向きに</span></div>
+      <div class="mrow"><span class="mk">筆記</span><span>薄墨の筆ペンで。名前はフルネームで水引の下に</span></div>
+      <div class="mrow"><span class="mk">袱紗(ふくさ)</span><span>紺・グレーなど寒色系(紫は慶弔兼用)</span></div>
+    </div>
+    <div class="warnbox"><b>⚠ 注意:</b> 「4」「9」のつく金額は避ける。通夜と葬儀の両方に参列する場合、香典はどちらか一度だけ。</div>
+  </div>
+  <p class="small">相場は一般的な目安です。地域の慣習や、故人・ご遺族とのおつき合いの深さを優先してください。会社関係は社内の慣例(連名など)の確認を。</p>`;
+  el.innerHTML=html;
+  el.querySelectorAll("#krelSeg button").forEach(b=>b.onclick=()=>{ koudenSel.rel=+b.dataset.v; renderKouden(); });
+  el.querySelectorAll("#kageSeg button").forEach(b=>b.onclick=()=>{ koudenSel.age=+b.dataset.v; renderKouden(); });
+  el.querySelectorAll("#krel2Seg button").forEach(b=>b.onclick=()=>{ koudenSel.rel2=b.dataset.v; renderKouden(); });
+}
+
+/* ============ マナー知識タブ ============ */
+function renderKnow(){
+  const el=$("#tab-know");
+  el.innerHTML=`<p class="small" style="margin-bottom:8px">急なときに迷わないための基本マナーです。</p>`+
+    ARTICLES.map((a,i)=>`<div class="card article"><details ${i===0?"open":""}><summary>${esc(a.t)}</summary>${a.b}</details></div>`).join("");
+}
+
+/* ============ 設定タブ ============ */
+function renderSettings(){
+  const el=$("#tab-settings");
+  el.innerHTML=`
+  <div class="card">
+    <h2 style="margin-top:0">このアプリについて</h2>
+    <p class="small">結婚式のご祝儀・お葬式の香典などの金額相場と基本マナーを、選ぶだけで確認できる早見表アプリです。</p>
+    <p class="small" style="margin-top:6px">金額はいずれも<b>一般的なマナーとして広く共有されている目安</b>です。地域の慣習・ご家庭の考え方・おつき合いの深さによって変わりますので、迷ったら身近な年長者や職場の慣例に合わせてください。</p>
+    <p class="small" style="margin-top:6px">このアプリは何も入力・保存しません。外部への送信もなく、一度開けばオフラインでも使えます。</p>
+  </div>
+  `;
+}
+
+/* ============ タブ・起動 ============ */
+let tab="iwai";
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.addEventListener("click",()=>{ tab=b.dataset.tab; render(); });
+});
+function render(){
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===tab));
+  ["iwai","kouden","know","settings"].forEach(t=>{ $("#tab-"+t).hidden=(t!==tab); });
+  if(tab==="iwai") renderIwai();
+  if(tab==="kouden") renderKouden();
+  if(tab==="know") renderKnow();
+  if(tab==="settings") renderSettings();
+}
+render();
+</script>
+<script>
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js");
+</script>
+</body>
+</html>
