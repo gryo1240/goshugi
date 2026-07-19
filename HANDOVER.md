@@ -14,12 +14,12 @@
 | 項目 | 内容 |
 |---|---|
 | アプリ名 | ご祝儀・香典 早見表 |
-| 公開URL | https://gryo1240.github.io/goshugi/ (※リポジトリ公開後に有効) |
+| 公開URL | https://gryo1240.github.io/goshugi/ |
 | 種別 | 冠婚葬祭の金額相場とマナーの早見表アプリ(PWA・インストール可) |
 | 料金 / 登録 | 完全無料・アカウント登録不要・広告なし(アプリ本体) |
 | データの扱い | **何も入力・保存しない完全ステートレス**。外部送信なし |
 | 対応端末 | スマホ(Android/iPhone)・PC のモダンブラウザ |
-| リポジトリ | https://github.com/gryo1240/goshugi (予定) |
+| リポジトリ | https://github.com/gryo1240/goshugi (public・公開済み) |
 
 ### アプリの特徴(記事の訴求ポイント)
 
