@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#8A6D2F">
+<meta name="theme-color" content="#F5F2EB">
 <title>ご祝儀・香典 早見表 — 相手との関係と年代で相場がわかる</title>
 <meta name="description" content="結婚式のご祝儀・お葬式の香典はいくら包む?相手との関係と自分の年代を選ぶだけで金額相場と袋・表書き・お札のマナーがわかる無料アプリ。登録不要・完全オフライン対応。">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -12,81 +12,123 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="ご祝儀香典">
+<script src="jp-phrase-3.js" defer></script>
 </head>
 <body>
 <style>
+/* ===== 2026-09-28 刷新:「袱紗（ふくさ）と中袋」 =====
+   見せ場は1つ: 相場の結果を、開いた袱紗の上に置いた中袋として組む。金額は中袋の金額欄に。
+   袱紗の色はタブで替える（お祝い=臙脂・香典=紺・知識と設定=慶弔兼用の紫）。香典の金額は薄墨の色。
+   香典タブには紅白・金・のしなど祝い物の飾りを一切出さない。絵文字は使わない */
 :root{
-  --bg:#F8F5EF; --surface:#FFFFFF; --ink:#322B1F; --muted:#7E7460;
-  --line:#E8E1D2; --accent:#8A6D2F; --accent-ink:#FFFFFF; --accent-soft:#F2EAD8;
-  --warn:#B0563B; --warn-soft:#F6E9E3; --chip:#EFE9DB; --ok:#3E7A52; --okbg:#E5F0E9;
-  --shadow:0 1px 3px rgba(60,50,25,.08);
+  --bg:#F5F2EB; --surface:#FDFBF6; --ink:#2F2A22; --muted:#6E6656;
+  --line:#DDD5C4; --accent:#7B2733; --accent-ink:#FFFFFF; --accent-soft:#F1E4E3;
+  --warn:#9A3B2A; --warn-soft:#F5E6DF; --chip:#ECE6D9; --ok:#3E7A52; --okbg:#E5F0E9;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif CJK JP","Noto Serif JP",serif;
+  --fukusa:#7B2733; --fukusa2:#6A1F2A; --amt:#7B2733; --amtline:#B98A8F;
+  --shadow:none;
 }
+body[data-mode="kouden"]{ --fukusa:#2D3850; --fukusa2:#252E43; --amt:#5E5E5E; --amtline:#A7A7A7; --accent:#2D3850; --accent-soft:#E4E7EE; }
+body[data-mode="know"], body[data-mode="settings"]{ --fukusa:#56416F; --fukusa2:#48365E; --accent:#56416F; --accent-soft:#ECE7F1; }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#1B1812; --surface:#26221A; --ink:#ECE6D9; --muted:#A99F8B;
-    --line:#3D3728; --accent:#CBAD6A; --accent-ink:#2A2008; --accent-soft:#3A331F;
+    --bg:#1A1714; --surface:#24201B; --ink:#ECE6D9; --muted:#A99F8B;
+    --line:#3D3728; --accent:#D9868F; --accent-ink:#2A0E12; --accent-soft:#3A2528;
     --warn:#D69073; --warn-soft:#3A2A21; --chip:#332D20; --ok:#7FBE97; --okbg:#233A2C;
-    --shadow:0 1px 3px rgba(0,0,0,.35);
   }
+  body[data-mode="kouden"]{ --accent:#9FB0D6; --accent-soft:#262C3A; }
+  body[data-mode="know"], body[data-mode="settings"]{ --accent:#BCA7D8; --accent-soft:#2F2838; }
+  /* 暗い地では袱紗の濃い色の塗りが沈むので、選んだボタンは明るい色で塗る */
+  .seg button.on{background:var(--accent); color:#1A1714; border-color:var(--accent);}
 }
 :root[data-theme="light"]{
-  --bg:#F8F5EF; --surface:#FFFFFF; --ink:#322B1F; --muted:#7E7460;
-  --line:#E8E1D2; --accent:#8A6D2F; --accent-ink:#FFFFFF; --accent-soft:#F2EAD8;
-  --warn:#B0563B; --warn-soft:#F6E9E3; --chip:#EFE9DB; --ok:#3E7A52; --okbg:#E5F0E9;
-  --shadow:0 1px 3px rgba(60,50,25,.08);
+  --bg:#F5F2EB; --surface:#FDFBF6; --ink:#2F2A22; --muted:#6E6656;
+  --line:#DDD5C4; --accent:#7B2733; --accent-ink:#FFFFFF; --accent-soft:#F1E4E3;
+  --warn:#9A3B2A; --warn-soft:#F5E6DF; --chip:#ECE6D9;
 }
 :root[data-theme="dark"]{
-  --bg:#1B1812; --surface:#26221A; --ink:#ECE6D9; --muted:#A99F8B;
-  --line:#3D3728; --accent:#CBAD6A; --accent-ink:#2A2008; --accent-soft:#3A331F;
-  --warn:#D69073; --warn-soft:#3A2A21; --chip:#332D20; --ok:#7FBE97; --okbg:#233A2C;
-  --shadow:0 1px 3px rgba(0,0,0,.35);
+  --bg:#1A1714; --surface:#24201B; --ink:#ECE6D9; --muted:#A99F8B;
+  --line:#3D3728; --accent:#D9868F; --accent-ink:#2A0E12; --accent-soft:#3A2528;
+  --warn:#D69073; --warn-soft:#3A2A21; --chip:#332D20;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 html,body{background:var(--bg); color:var(--ink);
   font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Noto Sans JP",Meiryo,sans-serif;
-  font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-wrap:break-word;}
 #app{max-width:720px; margin:0 auto; padding:0 14px 84px;}
 header.top{position:sticky; top:0; z-index:20; background:var(--bg);
-  padding:14px 2px 10px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--line);}
-header.top h1{font-size:18px; font-weight:700; letter-spacing:.02em;}
-header.top .sub{color:var(--muted); font-size:13px; margin-left:auto;}
-main{padding-top:14px;}
-h2{font-size:15px; font-weight:700; letter-spacing:.04em; margin:18px 0 8px;}
+  padding:12px 2px 9px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--ink);}
+header.top h1{font-family:var(--mincho); font-size:18px; font-weight:700; letter-spacing:.08em;}
+header.top .sub{color:var(--muted); font-size:13px; margin-left:auto; letter-spacing:.1em;}
+main{padding-top:12px;}
+h2{font-family:var(--mincho); font-size:15px; font-weight:700; letter-spacing:.06em; margin:18px 0 8px;}
 .small{font-size:12.5px; color:var(--muted);}
-.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:12px 14px; margin-bottom:10px;}
-button{font:inherit; cursor:pointer; border:none; border-radius:8px; padding:8px 14px; background:var(--chip); color:var(--ink);}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:2px; padding:12px 14px; margin-bottom:10px;}
+button{font:inherit; cursor:pointer; border:none; border-radius:2px; padding:8px 14px; background:var(--chip); color:var(--ink);}
 button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-nav.tabs{position:fixed; bottom:0; left:0; right:0; z-index:30; background:var(--surface); border-top:1px solid var(--line); display:flex; justify-content:center;}
+nav.tabs{position:fixed; bottom:0; left:0; right:0; z-index:30; background:var(--surface); border-top:1px solid var(--ink); display:flex; justify-content:center;}
 nav.tabs .inner{display:flex; width:100%; max-width:720px;}
-nav.tabs button{flex:1; background:none; border-radius:0; padding:10px 0 12px; font-size:11.5px; color:var(--muted); display:flex; flex-direction:column; gap:2px; align-items:center;}
-nav.tabs button .ic{font-size:18px; line-height:1;}
+nav.tabs button{flex:1; background:none; border-radius:0; padding:9px 0 11px; font-size:11.5px; color:var(--muted); display:flex; flex-direction:column; gap:3px; align-items:center;}
 nav.tabs button.on{color:var(--accent); font-weight:700;}
-.f-row{margin:12px 0;}
+/* 線のアイコン */
+.ic{display:inline-block; width:20px; height:20px; background:currentColor; flex:none; -webkit-mask:var(--m) center/contain no-repeat; mask:var(--m) center/contain no-repeat;}
+@supports not ((mask-image:none) or (-webkit-mask-image:none)){ .ic{display:none;} }
+.ic-env{--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linejoin='round'><rect x='6' y='3' width='12' height='18' rx='1'/><path d='M6 10h12'/><path d='M10 14h4'/></svg>");}
+.ic-env2{--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linejoin='round'><rect x='6' y='3' width='12' height='18' rx='1'/><path d='M12 7v10'/></svg>");}
+.ic-book{--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linejoin='round'><path d='M4 5.5c3-1.5 5.5-1.5 8 0v14c-2.5-1.5-5-1.5-8 0z'/><path d='M20 5.5c-3-1.5-5.5-1.5-8 0v14c2.5-1.5 5-1.5 8 0z'/></svg>");}
+.ic-gear{--m:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round'><circle cx='12' cy='12' r='3.2'/><path d='M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1'/></svg>");}
+.f-row{margin:11px 0;}
 .f-row:first-child{margin-top:0;}
 .f-row .lbl{font-size:12.5px; color:var(--muted); font-weight:700; letter-spacing:.05em; margin-bottom:5px;}
 .seg{display:flex; flex-wrap:wrap; gap:6px;}
-.seg button{padding:6px 12px; font-size:13px; border:1px solid var(--line); background:var(--surface); border-radius:8px;}
-.seg button.on{background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:700;}
-/* result */
-.result{text-align:center; padding:16px 14px;}
-.result .lb{font-size:12.5px; color:var(--muted);}
-.result .amt{font-size:30px; font-weight:800; color:var(--accent); letter-spacing:.02em; line-height:1.4;}
-.result .note{font-size:13px; margin-top:4px;}
+.seg button{padding:5px 11px; font-size:13px; border:1px solid var(--line); background:var(--surface); border-radius:2px;}
+.seg button.on{background:var(--fukusa); color:#fff; border-color:var(--fukusa); font-weight:700;}
+/* ---- 袱紗（布）と中袋（紙） ---- */
+.result{position:relative; text-align:center; padding:8px 6px; border:none;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(-45deg, rgba(0,0,0,.06) 0 1px, transparent 1px 3px),
+    linear-gradient(160deg, var(--fukusa), var(--fukusa2));}
+/* 包んでいた布の角（左上に折り返し） */
+.result::before{content:""; position:absolute; left:0; top:0; width:22px; height:22px;
+  background:linear-gradient(135deg, var(--bg) 0 50%, rgba(255,255,255,.14) 50% 100%);}
+.naka{position:relative; background:#FFFDF8; color:#2F2A22; border:1px solid #D9D1BF; padding:10px 9px 8px;
+  box-shadow:0 1px 0 rgba(0,0,0,.25);}
+.result .lb{font-size:12.5px; color:#6E6656;}
+/* 中袋の金額欄 */
+.result .amt{display:inline-block; font-family:var(--mincho); font-size:28px; font-weight:700; color:var(--amt); letter-spacing:.06em; line-height:1.35;
+  margin:6px 0 2px; padding:1px 16px; border:3px double var(--amtline);}
+.result .note{font-size:13px; margin-top:4px; color:#4A4336;}
 .chips{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:10px;}
-.chip{display:inline-block; font-size:12.5px; padding:4px 11px; border-radius:999px; background:var(--accent-soft); color:var(--ink); font-weight:600;}
-.mannerbox{margin-top:10px; text-align:left;}
-.mannerbox .mrow{display:flex; gap:8px; padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+.chip{display:inline-block; font-size:12.5px; padding:4px 11px; border-radius:2px; background:var(--accent-soft); color:var(--ink); font-weight:600;}
+.mannerbox{margin-top:8px; text-align:left; border-top:1px solid #2F2A22;}
+.mannerbox .mrow{display:flex; gap:8px; padding:5px 0; border-bottom:1px dotted #CFC6B3; font-size:13.5px; line-height:1.55;}
 .mannerbox .mrow:last-child{border-bottom:none;}
-.mannerbox .mk{flex:0 0 6.5em; color:var(--muted); font-weight:700; font-size:12.5px;}
-.warnbox{background:var(--warn-soft); border-radius:8px; padding:9px 12px; font-size:13px; margin-top:10px; text-align:left;}
+.mannerbox .mk{flex:0 0 6em; color:#6E6656; font-weight:700; font-size:12.5px; font-family:var(--mincho);}
+.mannerbox .small{color:#6E6656;}
+.warnbox{background:transparent; border:1px solid var(--warn); border-left-width:4px; border-radius:0; padding:7px 10px; font-size:13px; margin-top:8px; text-align:left; color:#2F2A22;}
 .warnbox b{color:var(--warn);}
-details{margin-top:8px;}
-details summary{cursor:pointer; font-size:13.5px; padding:4px 0; font-weight:600;}
-.article h4{font-size:14px; margin:12px 0 4px;}
-.article p,.article li{font-size:13.5px;}
+.naka .warnbox{--warn:#9A3B2A;}
+/* 香典では赤みのある色を使わない（注意書きの枠も墨色） */
+body[data-mode="kouden"] .naka .warnbox{--warn:#3F3F3F;}
+details{margin-top:6px;}
+details summary{cursor:pointer; font-size:13.5px; padding:4px 0; font-weight:700; font-family:var(--mincho);}
+.article h4{font-size:14px; margin:9px 0 3px; font-family:var(--mincho);}
+.article p,.article li{font-size:13.5px; line-height:1.55;}
+.card.article{margin-bottom:9px;}
+.nw{white-space:nowrap;}
 .article ul,.article ol{padding-left:1.4em;}
 .article table{border-collapse:collapse; margin:6px 0; font-size:13px; width:100%;}
 .article th,.article td{border:1px solid var(--line); padding:4px 8px; text-align:left;}
+.article td:last-child{font-family:var(--mincho);}
+/* いちばん狭い幅では紙面の左右を詰めて、文節で折れる分の行の増えを吸収する */
+@media (max-width:320px){ .card:not(.result){padding-left:10px; padding-right:10px;} }
+@media (forced-colors: active){ .ic{forced-color-adjust:none; background:ButtonText;} nav.tabs button.on .ic{background:Highlight;} }
+@media (forced-colors: active){
+  .result{border:2px solid CanvasText;}
+  .result::before{display:none;}
+  .seg button.on{forced-color-adjust:none; background:Highlight; color:HighlightText;}
+}
 </style>
 
 <div id="app">
@@ -99,10 +141,10 @@ details summary{cursor:pointer; font-size:13.5px; padding:4px 0; font-weight:600
   </main>
 </div>
 <nav class="tabs"><div class="inner">
-  <button data-tab="iwai" class="on"><span class="ic">🎊</span>お祝い</button>
-  <button data-tab="kouden"><span class="ic">🥀</span>香典</button>
-  <button data-tab="know"><span class="ic">💡</span>マナー知識</button>
-  <button data-tab="settings"><span class="ic">⚙️</span>設定</button>
+  <button data-tab="iwai" class="on"><span class="ic ic-env" aria-hidden="true"></span>お祝い</button>
+  <button data-tab="kouden"><span class="ic ic-env2" aria-hidden="true"></span>香典</button>
+  <button data-tab="know"><span class="ic ic-book" aria-hidden="true"></span>マナー知識</button>
+  <button data-tab="settings"><span class="ic ic-gear" aria-hidden="true"></span>設定</button>
 </div></nav>
 
 <script>
@@ -214,7 +256,7 @@ const ARTICLES=[
  <li>香典の表書きは<b>薄墨の筆ペン</b>で書くのが正式(「涙で墨が薄まった」の意)。四十九日以降の法要は濃い墨に戻す</li>
  <li>お祝いは<b>濃い墨</b>ではっきりと書く</li>
  <li>名前はフルネームで水引の下・中央に。夫婦連名は夫を右、妻を左に</li>
- <li>会社の連名は<b>3名まで</b>が目安。右から目上の順に書き、4名以上は「◯◯一同」+全員の名前を書いた紙を中に入れる</li></ul>`},
+ <li>会社の連名は<b>3名まで</b>が目安。右から目上の順に書き、4名以上は<span class="nw">「◯◯一同」</span>+全員の名前を書いた紙を中に入れる</li></ul>`},
  {t:"渡し方と当日のふるまい",b:`<h4>結婚式</h4>
  <ul><li>受付で「本日はおめでとうございます」と一言添えて両手で渡す</li>
  <li>袱紗から出して、相手が読める向きに回してから</li></ul>
@@ -245,7 +287,7 @@ function renderIwai(){
     <div class="f-row" style="margin-bottom:0"><div class="lbl">あなたの年代は?</div>
       <div class="seg" id="ageSeg">${AGES.map((a,i)=>`<button data-v="${i}" class="${iwaiSel.age===i?"on":""}">${esc(a)}</button>`).join("")}</div></div>
   </div>`;
-  html+=`<div class="card result">
+  html+=`<div class="card result"><div class="naka">
     <div class="lb">${esc(ev.label)} × ${esc(relLabel)} × ${esc(AGES[iwaiSel.age])} の相場</div>
     <div class="amt">${esc(amount)}</div>
     ${ev.note?`<div class="note small">${esc(ev.note)}</div>`:""}
@@ -256,8 +298,8 @@ function renderIwai(){
       <div class="mrow"><span class="mk">袱紗(ふくさ)</span><span>${esc(ev.manner.fukusa)}</span></div>
       <div class="mrow"><span class="mk">メモ</span><span>${esc(ev.manner.chu)}</span></div>
     </div>
-    ${ev.warn?`<div class="warnbox"><b>⚠ 注意:</b> ${esc(ev.warn)}</div>`:""}
-  </div>
+    ${ev.warn?`<div class="warnbox"><b>注意:</b> ${esc(ev.warn)}</div>`:""}
+  </div></div>
   <p class="small">相場は一般的な目安です。地域やご家庭の慣習、おつき合いの深さを優先してください。</p>`;
   el.innerHTML=html;
   el.querySelectorAll("#evSeg button").forEach(b=>b.onclick=()=>{ iwaiSel.ev=b.dataset.v; iwaiSel.rel=0; renderIwai(); });
@@ -279,7 +321,7 @@ function renderKouden(){
     <div class="f-row" style="margin-bottom:0"><div class="lbl">ご宗教は?(表書きが変わります)</div>
       <div class="seg" id="krel2Seg">${RELIGIONS.map(r=>`<button data-v="${r.id}" class="${koudenSel.rel2===r.id?"on":""}">${esc(r.label)}</button>`).join("")}</div></div>
   </div>`;
-  html+=`<div class="card result">
+  html+=`<div class="card result"><div class="naka">
     <div class="lb">${esc(relLabel)} × ${esc(AGES[koudenSel.age])} の香典の相場</div>
     <div class="amt">${esc(amount)}</div>
     <div class="mannerbox">
@@ -289,8 +331,8 @@ function renderKouden(){
       <div class="mrow"><span class="mk">筆記</span><span>薄墨の筆ペンで。名前はフルネームで水引の下に</span></div>
       <div class="mrow"><span class="mk">袱紗(ふくさ)</span><span>紺・グレーなど寒色系(紫は慶弔兼用)</span></div>
     </div>
-    <div class="warnbox"><b>⚠ 注意:</b> 「4」「9」のつく金額は避ける。通夜と葬儀の両方に参列する場合、香典はどちらか一度だけ。</div>
-  </div>
+    <div class="warnbox"><b>注意:</b> 「4」「9」のつく金額は避ける。通夜と葬儀の両方に参列する場合、香典はどちらか一度だけ。</div>
+  </div></div>
   <p class="small">相場は一般的な目安です。地域の慣習や、故人・ご遺族とのおつき合いの深さを優先してください。会社関係は社内の慣例(連名など)の確認を。</p>`;
   el.innerHTML=html;
   el.querySelectorAll("#krelSeg button").forEach(b=>b.onclick=()=>{ koudenSel.rel=+b.dataset.v; renderKouden(); });
@@ -326,6 +368,7 @@ document.querySelectorAll("nav.tabs button").forEach(b=>{
 function render(){
   document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===tab));
   ["iwai","kouden","know","settings"].forEach(t=>{ $("#tab-"+t).hidden=(t!==tab); });
+  document.body.dataset.mode=tab;   // 袱紗の色（お祝い=臙脂・香典=紺・ほか=紫）
   if(tab==="iwai") renderIwai();
   if(tab==="kouden") renderKouden();
   if(tab==="know") renderKnow();
